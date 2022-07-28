@@ -31,8 +31,9 @@ class Contenedor{
         let contenidoArchivo = await this.getData()
         let contenidoJson = JSON.parse(contenidoArchivo)
         let array = []
-        const indice = contenidoJson.map(x=>x.id).sort()
-        objeto.id = indice[indice-1] + 1
+        const indice = contenidoJson.length + 1;
+        objeto.id = indice
+        console.log(objeto)
         if(!objeto.id){
             objeto.id = 1
             array = [{...objeto}]
@@ -48,18 +49,32 @@ class Contenedor{
 
     }
     async deleteAll(){
-        var i = 0;
-        archivo.splice(i, archivo.lenght)
+        try {
+            const datosVacios = []
+            fs.writeFileSync(this.nombreArchivo, JSON.stringify(datosVacios))
+            console.log("Se borraron los archivos")
+        } catch (error) {
+            console.log(error)
+        }
     }
     async getById(numId){
         const datos = await this.getData()
-        if (numId == datos.id){
-            dato = datos[numId]
-        }
-        return JSON.parse(dato)
+        const datosParseados = JSON.parse(datos)
+        const producto = datosParseados.find((el) => el.id === Number(numId))
+        
+        return producto ? console.log(producto): console.log(`No existe un producto con el id ${numId}`)
+        
     }
     async deleteById(posElemento){
-        jsLibraries.slice(posElemento, 1) 
+        try {
+            const datos = await this.getData()
+            const datosParseados = JSON.parse(datos)
+            const datosAGuardar = datosParseados.filter( (dato) => dato.id != Number(posElemento))
+            fs.writeFileSync(this.nombreArchivo, JSON.stringify(datosAGuardar))
+            console.log(`Se elimino el producto con id ${posElemento}`)
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
