@@ -76,16 +76,24 @@ class Contenedor{
             console.log(error)
         }
     }
+    async traerDatos(){
+        fetch('./archivos/productos.txt').then((res)=>{
+            return res.json
+        }).then((prod)=>{
+            console.log(prod)
+        })
+    }
 }
 
 
+
+
 const objetoInicial = {nombre: "Alan", apellido: "Rojas"}
-const objeto2 = {nombre: "John", apellido: "Doe"}
+
 
 const objeto1 = new Contenedor("archivo")
 
 objeto1.getData()
-objeto1.save(objetoInicial)
+objeto1.save()
 objeto1.getAll().then(x=>console.log(JSON.stringify(x)))
-objeto1.deleteAll()
-objeto1.deleteById(1)
+

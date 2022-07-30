@@ -6,4 +6,8 @@
     "title": "Cartuchera",                                                                                                                                 
     "price": 300.12,                                                                                                                                     
     "id": 2                                                                                                                                           
+  },{                                                                                                                                                    
+    "title": "Birome",                                                                                                                                 
+    "price": 80.36,                                                                                                                                     
+    "id": 3                                                                                                                                           
   }]
